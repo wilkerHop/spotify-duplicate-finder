@@ -1,0 +1,53 @@
+<h1 class="duplicates-found" *ngIf="duplicateTracks">Duplicates Found!</h1>
+
+<div class="spinner" *ngIf="!duplicateTracks">Analyzing {{lastOffset}} tracks
+</div>
+
+<!-- <div class="duplicates">
+  <div class="item">
+    <div class="details">
+      <span class="item__name">I Am the Highway</span>
+
+      <span class="item__artist">by Audioslave</span>
+
+      <span class="item__quantity">is 2 times on your library</span>
+
+      <span class="item__open" (click)="openDetails($event)"></span>
+    </div>
+
+  </div>
+</div> -->
+
+<div class="duplicates" *ngIf="duplicateTracks">
+  <div class="item" *ngFor="let item of duplicateTracks">
+    <div class="details details--block">
+      <span class="item__name"><b>{{item.name}}</b></span>
+
+      <span class="item__artist">by <b>{{item.artists}}</b></span>
+
+      <span class="item__quantity">is <b>{{item.count}}</b> times on your
+        library</span>
+      <span class="item__open" (click)="openDetails($event)"></span>
+
+    </div>
+
+    <div class="hidden-details" *ngFor="let track of item.tracks">
+      <div class="details">
+        <span>Added in {{track.addDate | date}}</span>
+
+        <span>Album: {{track.album}}</span>
+
+        <span>Year: {{track.year}}</span>
+      </div>
+
+      <div class="details">
+        <span>Popularity: {{track.popularity}}</span>
+
+        <span>Duration: {{track.duration / 100}}s</span>
+
+        <span [ngClass]="{explicit: track?.explicit}"></span>
+
+      </div>
+    </div>
+  </div>
+</div>
